@@ -1,0 +1,145 @@
+# ===========================================================================
+# STAFF MANAGEMENT ADDON CONFIGURATION
+# ===========================================================================
+version: "imcoolidk"
+# ===========================================================================
+# MAIN SETTINGS
+# ===========================================================================
+serverName: "Rushed"
+# IMPORTANT: Replace these placeholder IDs with your actual channel IDs
+# You can use the same channel for multiple purposes if needed
+staffListChannelId: "1480668174545584178"
+promotionDemotionChannelId: "1480569286337757314"
+logChannelId: "1480569286337757314"
+
+# Optional role pings for promotion/demotion announcements (leave empty to disable)
+RoleNotificationOnPromote: ""
+RoleNotificationOnDemote: ""
+
+# ===========================================================================
+# STAFF ROLES CONFIGURATION
+# ===========================================================================
+# Define roles in hierarchy order (highest to lowest)
+roles:
+  owner:
+    id: "1480575883399139328"
+    name: "Owner"
+    hierarchy: 5
+  admin:
+    id: "1480660216830759004"
+    name: "Administrator"
+    hierarchy: 4
+  moderator:
+    id: "1480660219385090309"
+    name: "Moderator"
+    hierarchy: 3
+  helper:
+    id: "1480660221960392764"
+    name: "Helper"
+    hierarchy: 2
+  trainee:
+    id: "1480660223831183524"
+    name: "Trainee"
+    hierarchy: 1
+
+# ===========================================================================
+# ADDITIONAL ROLES CONFIGURATION
+# ===========================================================================
+removeAdditionalRolesOnDemotion: true
+
+additionalRoles:
+  onFirstPromotion:
+    - id: "1480660420216754387"
+      name: "Staff Member"
+
+# ===========================================================================
+# PERMISSIONS CONFIGURATION
+# ===========================================================================
+permissions:
+  canPromote:
+    - "1480575883399139328"
+  canDemote:
+    - "1480575883399139328"
+  canStrike:
+    - "1480575883399139328"
+  canViewHistory:
+    - "1480575883399139328"
+
+# ===========================================================================
+# FEATURES CONFIGURATION
+# ===========================================================================
+features:
+  promotionDemotionMessages: true
+  staffListUpdates: true
+  showMembersStatus: false
+  sendDM: true
+  showJoinDate: false
+  showStaffCount: false
+  logActions: true
+  debug: false
+  strikeSystem: true
+  requireConfirmation: true
+
+# ===========================================================================
+# STRIKE SYSTEM CONFIGURATION
+# ===========================================================================
+strikes:
+  defaultDuration: 0
+  maxStrikes: 3
+  autoDemoteOnMaxStrikes: true
+
+# ===========================================================================
+# STATUS CONFIGURATION
+# ===========================================================================
+statusOrder:
+  - online
+  - idle
+  - dnd
+  - offline
+
+statusEmojis:
+  online: "🟢"
+  idle: "🟡"
+  dnd: "🔴"
+  offline: "⚫"
+
+# ===========================================================================
+# EMBED CONFIGURATION
+# ===========================================================================
+embed:
+  color: "#5865F2"
+  description:
+    - "Staff list for {serverName}"
+  image: ""
+  thumbnail: ""
+  footerText: "{serverName}"
+  footerImage: ""
+
+# ===========================================================================
+# EMBED COLORS
+# ===========================================================================
+embedColors:
+  promotion: "#00FF00"
+  demotion: "#FF0000"
+  log: "#3498DB"
+  strike: "#FF9900"
+  success: "#00CC66"
+  warning: "#FF9900"
+  error: "#FF0000"
+
+# ===========================================================================
+# TIME FORMATS CONFIGURATION
+# ===========================================================================
+timeFormats:
+  joinDate:
+    default: "short"
+    short: "MM/DD/YYYY"
+    long: "MMMM Do YYYY, h:mm:ss a"
+    relative: "YYYY-MM-DD"
+
+# ===========================================================================
+# COOLDOWNS CONFIGURATION
+# ===========================================================================
+cooldowns:
+  staffListUpdate: 15000
+  confirmationTimeout: 30

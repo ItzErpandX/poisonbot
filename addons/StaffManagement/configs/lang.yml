@@ -1,0 +1,324 @@
+# ===========================================================================
+# STAFF MANAGEMENT ADDON LANGUAGE FILE
+# ===========================================================================
+
+# ===========================================================================
+# ROLE-SPECIFIC PROMOTION/DEMOTION MESSAGES
+# ===========================================================================
+# Messages based on the role name they are promoted TO
+roleMessages:
+  # When someone gets promoted TO Trial Staff
+  Trainee:
+    promotion: |
+      Hey,
+      
+      You have been given a chance to prove yourself. Here's what you need to know:
+      
+      1. Check out the staff rules & guidelines in the staff channels.
+      2. Reach out to a moderator or higher staff if you have questions.
+      3. Remember to follow the server rules and lead by example.
+      4. Work hard to earn your permanent position!
+      
+      We believe in you and can't wait to see your contributions to the team!
+    
+  # When someone gets promoted TO Helper
+  Helper:
+    promotion: |
+      Welcome to the staff team! 🎉
+      
+      Congratulations on becoming a Helper, you have passed the hardest!
+      Here's what you need to know:
+
+      1. You have unlocked more permissions, use them responsibly!
+      *(You can check <#1480660420216754387> for your new permissions)*
+      2. Continue to be active and helpful in the community.
+      3. Reach out to a moderator or higher staff if you have any questions or need guidance.
+      4. Keep up the great work and aim for the next promotion!
+
+      We are excited to have you on the team and look forward to your contributions!
+    
+  # When someone gets promoted TO Moderator
+  Moderator:
+    promotion: |
+      Congratulations on your promotion to Moderator!
+      Your dedication and hard work as a Helper has been recognized.
+      
+      As a Moderator, you now have additional responsibilities:
+      - Help manage the community
+      - Assist with moderation duties
+      - Guide and mentor newer staff members
+      
+      Keep up the excellent work!
+    
+  # When someone gets promoted TO Admin
+  Administrator:
+    promotion: |
+      Congratulations on your promotion to Administrator!
+      Your exceptional leadership and dedication has earned you this position.
+      
+      As an Administrator, you are now part of the high staff team.
+      Continue to lead by example and help shape our community.
+    
+  # When someone gets promoted TO Owner
+#  owner:
+#    promotion: |
+#      Congratulations on becoming an Owner!
+#      
+#      You have reached the highest position in our staff hierarchy.
+#      As an Owner, you are responsible for the overall direction and management of the team.
+#      
+#      Lead with wisdom and integrity!
+
+# ===========================================================================
+# GENERAL MESSAGES
+# ===========================================================================
+messages:
+  # Channel announcement messages
+  channelMessages:
+    promotion: "🎉 {user} has been promoted from **{oldrole}** to **{newrole}**" # available placeholders {user}, {oldrole}, {newrole} and {moderator}
+    demotion: "📉 {user} has been demoted from **{oldrole}** to **{newrole}**"
+    removal: "👋 {user} is no longer a staff member."
+  
+  # DM messages for users
+  dmMessages:
+    promotion:
+      title: "🎉 Congratulations!"
+      fallback: "Congratulations on your promotion from **{oldrole}** to **{newrole}**!"
+    demotion:
+      title: "📢 Staff Update"
+      message: "You have been demoted from **{oldrole}** to **{newrole}**."
+    removal:
+      title: "📢 Staff Update"
+      message: "You have been removed from the staff team.\nIf you have any questions, please contact an Administrator."
+  
+  # Fallback messages if role-specific ones aren't found
+  promotion: "{user} has been promoted from {oldrole} to {newrole}! 🎉"
+  demotion: "{user} has been demoted from {oldrole} to {newrole}"
+  demotedAll: "{user} is no longer a staff member"
+  
+  # First time promotion (when getting additional roles)
+  firstTimePromotion: |
+    Welcome to the {serverName} staff team! 🎉
+    
+    You have been promoted to {newrole} and given additional staff privileges.
+    Please review the staff guidelines and reach out if you have any questions.
+
+# ===========================================================================
+# COMMAND RESPONSES
+# ===========================================================================
+commands:
+  # General responses
+  noPermission: "❌ You don't have permission to use this command."
+  userNotFound: "❌ User not found or not accessible."
+  invalidRole: "❌ Invalid role specified."
+  systemNotInitialized: "❌ Staff Management system is not initialized."
+  
+  # Promote command responses
+  promote:
+    success: "✅ Successfully promoted {user} from {oldrole} to {newrole}!"
+    alreadyHighest: "❌ {user} already has the highest staff role."
+    noStaffRole: "❌ {user} doesn't have any staff roles to promote from."
+    sameRole: "❌ {user} already has the {role} role."
+    cannotPromoteHigher: "❌ You cannot promote someone to a role higher than or equal to your own."
+    confirmationPrompt: "Please confirm this promotion by clicking the button below."
+    confirmationExpired: "❌ Promotion confirmation expired."
+    
+  # Demote command responses
+  demote:
+    success: "✅ Successfully demoted {user} from {oldrole} to {newrole}!"
+    alreadyLowest: "❌ {user} already has the lowest staff role."
+    noStaffRole: "❌ {user} doesn't have any staff roles to demote from."
+    sameRole: "❌ {user} already has the {role} role."
+    cannotDemoteHigher: "❌ You cannot demote someone with a role higher than or equal to your own."
+    confirmationPrompt: "Please confirm this demotion by clicking the button below."
+    confirmationExpired: "❌ Demotion confirmation expired."
+    
+  # Remove command responses
+  remove:
+    success: "✅ Successfully removed all staff roles from {user}!"
+    noStaffRole: "❌ {user} doesn't have any staff roles to remove."
+    confirmationPrompt: "Please confirm removing all staff roles from this user."
+    additionalRolesRemoved: "Additional staff roles were also removed as configured."
+    
+  # Strike command responses
+  strike:
+    added: "✅ Strike added to {user}. They now have {count} active strike(s)."
+    removed: "✅ Strike removed from {user}. Strike ID: {strikeId}"
+    notFound: "❌ Strike not found."
+    maxStrikesReached: "⚠️ {user} has reached the maximum number of strikes and has been automatically demoted."
+    
+  # History command responses
+  history:
+    noHistory: "No staff history found for {user}."
+    
+  # Error messages
+  errors:
+    roleNotFound: "❌ The specified role was not found in the staff hierarchy."
+    cannotPromoteSelf: "❌ You cannot promote yourself."
+    cannotDemoteSelf: "❌ You cannot demote yourself."
+    cannotRemoveSelf: "❌ You cannot remove your own staff roles."
+    higherRole: "❌ You cannot modify someone with a higher or equal role."
+    dmFailed: "⚠️ Could not send direct message to {user}."
+    databaseError: "❌ A database error occurred. Please try again later."
+    invalidDuration: "❌ Invalid duration format. Use format like '30d', '7d', '1h'."
+
+# ===========================================================================
+# CONFIRMATION MESSAGES
+# ===========================================================================
+confirmations:
+  # General confirmation messages
+  cancelled: "❌ Action cancelled."
+  expired: "❌ Confirmation expired."
+  
+  promote:
+    title: "🔼 Confirm Promotion"
+    description: "Are you sure you want to promote {user}?"
+    fields:
+      user: "👤 User"
+      currentRole: "📋 Current Role"
+      newRole: "🏆 New Role"
+      reason: "📝 Reason"
+    buttons:
+      confirm: "✅ Confirm"
+      cancel: "❌ Cancel"
+      
+  demote:
+    title: "🔽 Confirm Demotion"
+    description: "Are you sure you want to demote {user}?"
+    fields:
+      user: "👤 User"
+      currentRole: "📋 Current Role"
+      newRole: "🏆 New Role"
+      reason: "📝 Reason"
+    buttons:
+      confirm: "✅ Confirm"
+      cancel: "❌ Cancel"
+
+# ===========================================================================
+# STRIKE SYSTEM MESSAGES
+# ===========================================================================
+strikes:
+  # System messages
+  systemDisabled: "❌ Strike system is disabled."
+  
+  # DM messages for strikes
+  dmMessages:
+    added:
+      title: "⚠️ Staff Strike Issued"
+      description: "You have received a strike on {serverName}"
+      fields:
+        reason: "📝 Reason"
+        expires: "⏳ Expires"
+        strikeCount: "📊 Total Active Strikes"
+        
+    removed:
+      title: "✅ Staff Strike Removed"
+      description: "A strike has been removed on {serverName}"
+      fields:
+        reason: "📝 Original Reason"
+        removedBy: "🔨 Removed By"
+        
+    warning:
+      title: "🚨 Strike Warning"
+      description: "You are approaching the maximum number of strikes"
+      fields:
+        currentStrikes: "📊 Current Strikes"
+        maxStrikes: "⚠️ Maximum Strikes"
+        consequence: "🚫 Consequence"
+
+# ===========================================================================
+# STAFF LIST MESSAGES
+# ===========================================================================
+staffList:
+  title: "{serverName} Staff Team"
+  totalStaff: "Total Staff"
+  memberCount: "{count} member{plural}"
+  noMembers: "None"
+
+# ===========================================================================
+# HISTORY MESSAGES
+# ===========================================================================
+history:
+  title: "📋 Staff History - {username}"
+  fields:
+    promotions: "📈 Promotions"
+    demotions: "📉 Demotions"
+    strikes: "⚠️ Strikes ({count})"
+    noStrikes: "⚠️ Strikes"
+    noHistory: "No history available"
+  footerText: "Showing only active strikes. Use include_expired=true to show all."
+
+# ===========================================================================
+# LOG MESSAGES
+# ===========================================================================
+logs:
+  # Console log messages
+  initialized: "StaffManagement initialized successfully"
+  configValidated: "Config validation completed"
+  staffListUpdated: "Staff list updated successfully"
+  messageUpdated: "Staff list message updated successfully"
+  newMessageSent: "New staff list message sent and ID stored"
+  
+  # Action log embeds
+  embeds:
+    promotion:
+      title: "👑 Staff Promotion"
+      description: "{username} has been promoted"
+      fields:
+        user: "👤 User"
+        promotedBy: "🔨 Promoted By"
+        roleChange: "🏆 Role Change"
+        reason: "📝 Reason"
+        timestamp: "🕐 Time"
+        
+    demotion:
+      title: "👋 Staff Demotion"
+      description: "{username} has been demoted"
+      fields:
+        user: "👤 User"
+        demotedBy: "🔨 Demoted By"
+        roleChange: "🏆 Role Change"
+        reason: "📝 Reason"
+        timestamp: "🕐 Time"
+
+    demotedAll:
+      title: "test"
+      description: "test2"
+      fields:
+        user: "👤 User"
+        demotedBy: "🔨 Demoted By"
+        roleChange: "🏆 Role Change"
+        reason: "📝 Reason"
+        timestamp: "🕐 Time"
+        
+    strikeAdd:
+      title: "⚠️ Staff Strike Added"
+      description: "A strike has been issued to {username}"
+      fields:
+        user: "👤 User"
+        issuedBy: "🔨 Issued By"
+        reason: "📝 Reason"
+        duration: "⏳ Duration"
+        expires: "⌛ Expires"
+        strikeId: "🆔 Strike ID"
+        silent: "🔕 Silent"
+        
+    strikeRemove:
+      title: "✅ Staff Strike Removed"
+      description: "A strike has been removed from {username}"
+      fields:
+        user: "👤 User"
+        removedBy: "🔨 Removed By"
+        reason: "📝 Original Reason"
+        strikeId: "🆔 Strike ID"
+        timestamp: "🕐 Time"
+  
+  # Error logs
+  errors:
+    configMissing: "Missing {field} in config"
+    invalidConfig: "Invalid {field} configuration"
+    channelNotFound: "Channel with ID {channelId} not found"
+    messageNotFound: "Could not find the message"
+    updateFailed: "Failed to update staff list: {error}"
+    dmFailed: "Error sending DM to {user}: {error}"
+    logFailed: "Failed to send log message: {error}"

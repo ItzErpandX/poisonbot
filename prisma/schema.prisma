@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Ticket {
+  channelId      String   @id @map("channel_id")
+  userId         String   @map("user_id")
+  staffId        String?  @map("staff_id")
+  members        TicketMember[]
+  
+  @@map("tickets")
+}
+
+model TicketMember {
+  channelId  String   @map("channel_id")
+  memberId   String   @map("member_id")
+  ticket     Ticket   @relation(fields: [channelId], references: [channelId], onDelete: Cascade)
+
+  @@id([channelId, memberId])
+  @@map("ticket_members")
+}
+
+model TicketStats {
+  userId                String  @id @map("user_id")
+  ticketsOpened         Int     @default(0) @map("tickets_opened")
+  ticketsClosed         Int     @default(0) @map("tickets_closed")
+  ticketsClaimed        Int     @default(0) @map("tickets_claimed")
+  ticketsUnclaimed      Int     @default(0) @map("tickets_unclaimed")
+  ticketsForceClained   Int     @default(0) @map("tickets_force_claimed")
+  ticketsMessageSent    Int     @default(0) @map("tickets_message_sent")
+  ticketsStaffMessageSent Int   @default(0) @map("tickets_staff_message_sent")
+
+  @@map("ticket_stats")
+}
+
+model Warning {
+  warnId      String   @id @map("warn_id")
+  userId      String   @map("user_id")
+  moderatorId String   @map("moderator_id")
+  reason      String?
+  timestamp   String
+  expiresAt   String?  @map("expires_at")
+
+  @@map("warnings")
+}
+
+model UserMessage {
+  userId       String  @id @map("user_id")
+  messageCount Int     @default(0) @map("message_count")
+
+  @@map("user_messages")
+}
+
+model StickyMessage {
+  channelId      String  @id @map("channel_id")
+  message        String
+  lastMessageId  String? @map("last_message_id")
+  lastReposted   Int?    @map("last_reposted")
+
+  @@map("sticky_messages")
+}
+
+model TicketRating {
+  id      String @id @default(cuid())
+  userId  String @map("user_id")
+  quality Int
+  speed   Int
+  comment String?
+
+  @@map("ticket_ratings")
+}
+
+model StaffHistory {
+  id                String   @id @default(cuid())
+  guildId           String   @map("guild_id")
+  userId            String   @map("user_id")
+  username          String
+  type              String   // 'promotion', 'demotion', 'strike_add', 'strike_remove'
+  fromRole          String?  @map("from_role")
+  toRole            String?  @map("to_role")
+  reason            String?
+  moderatorId       String   @map("moderator_id")
+  moderatorUsername String   @map("moderator_username")
+  strikeId          String?  @map("strike_id")
+  timestamp         DateTime @default(now())
+
+  @@map("staff_history")
+}
+
+model StaffListMessage {
+  id        String @id @default(cuid())
+  guildId   String @map("guild_id")
+  messageId String @map("message_id")
+  channelId String @map("channel_id")
+
+  @@map("staff_list_messages")
+}
+
+model StaffStrike {
+  id                String    @id @default(cuid())
+  strikeId          String    @unique @map("strike_id")
+  guildId           String    @map("guild_id")
+  userId            String    @map("user_id")
+  username          String
+  reason            String
+  issuedBy          String    @map("issued_by")
+  issuedByUsername  String    @map("issued_by_username")
+  issuedAt          DateTime  @default(now()) @map("issued_at")
+  expiresAt         DateTime? @map("expires_at")
+  isActive          Boolean   @default(true) @map("is_active")
+  removedBy         String?   @map("removed_by")
+  removedByUsername String?   @map("removed_by_username")
+  removedAt         DateTime? @map("removed_at")
+  silent            Boolean   @default(false)
+
+  @@map("staff_strikes")
+}
+
+model WordSnake {
+  channelId String  @id @map("channel_id")
+  lastWord  String  @default("")
+  lastUserId String? @map("last_user_id")
+
+  @@map("word_snake")
+}
+
+model GameState {
+  id             String  @id @default(cuid())
+  currentCount   Int     @default(1) @map("current_count")
+  lastUserId     String? @map("last_user_id")
+
+  @@map("game_state")
+}
